@@ -10,7 +10,7 @@ class LoginScreen extends StatelessWidget {
           emailField(),
           passwordField(),
           SizedBox(
-            height: 16.0,
+            height: 17.0,
           ),
           submitButton(),
         ],

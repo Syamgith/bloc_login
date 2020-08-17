@@ -9,8 +9,6 @@ class Provider extends InheritedWidget {
   Provider({Key key, Widget child}) : super(key: key, child: child);
 
   static Bloc of(BuildContext context) {
-    return (context.getElementForInheritedWidgetOfExactType<Provider>()
-            as Provider)
-        .bloc;
+    return context.dependOnInheritedWidgetOfExactType<Provider>().bloc;
   }
 }

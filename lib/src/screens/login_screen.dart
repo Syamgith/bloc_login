@@ -1,3 +1,4 @@
+import 'package:bloc_login/src/blocs/bloc.dart';
 import 'package:flutter/material.dart';
 
 import '../blocs/provider.dart';
@@ -15,13 +16,13 @@ class LoginScreen extends StatelessWidget {
           SizedBox(
             height: 17.0,
           ),
-          submitButton(),
+          submitButton(bloc),
         ],
       ),
     );
   }
 
-  Widget emailField(bloc) {
+  Widget emailField(Bloc bloc) {
     return StreamBuilder<Object>(
         stream: bloc.email,
         builder: (context, snapshot) {
@@ -37,7 +38,7 @@ class LoginScreen extends StatelessWidget {
         });
   }
 
-  Widget passwordField(bloc) {
+  Widget passwordField(Bloc bloc) {
     return StreamBuilder<Object>(
         stream: bloc.password,
         builder: (context, snapshot) {
@@ -53,8 +54,20 @@ class LoginScreen extends StatelessWidget {
         });
   }
 
-  Widget submitButton() {
-    return RaisedButton(
-        child: Text('Submit'), color: Colors.blue, onPressed: () {});
+  Widget submitButton(Bloc bloc) {
+    return StreamBuilder<Object>(
+      stream: bloc.submitValid,
+      builder: (context, snapshot) {
+        return RaisedButton(
+          child: Text('Submit'),
+          color: Colors.blue,
+          onPressed: snapshot.hasError
+              ? null
+              : () {
+                  print('Hi there');
+                },
+        );
+      },
+    );
   }
 }
